@@ -6,12 +6,13 @@ export const drawLetters = () => {
     for (let i = 0; i < LETTER_POOL[letter]; i++) {
       letterList.push(letter);
     }
-  };
+  }
 
   for (let i = letterList.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i+1));
     [letterList[i], letterList[j]] = [letterList[j], letterList[i]];
   }
+
   return letterList.splice(0, 10);
 };
 
@@ -25,6 +26,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
     }
     lettersBank.splice(lettersBank.indexOf(letter),1);
   }
+
   return true;
 };
 
@@ -52,6 +54,7 @@ export const scoreWord = (word) => {
     if (word.length >= 7) {
       score += 8;
     }
+
     return score;
 };
 
@@ -68,7 +71,8 @@ export const highestScoreFrom = (words) => {
       maxScore = score;
       maxWord = word;
       tieWords = [word];
-    } else if (score === maxScore) {
+    } 
+    else if (score === maxScore) {
       tieWords.push(word);
     }
   }
@@ -78,14 +82,15 @@ export const highestScoreFrom = (words) => {
     for (let tieWord of tieWords) {
       if (tieWord.length === 10) {
         return { word: tieWord, score: maxScore };
-      } else if (tieWord.length < minLen) {
+      } 
+      else if (tieWord.length < minLen) {
         maxWord = tieWord;
         minLen = tieWord.length;
       }
     }
   }
-
-  return { word: maxWord, score: maxScore };
+  
+  return { word: maxWord, score: maxScore};
 };
 
 const LETTER_POOL = {A: 9, B: 2, C: 2, D: 4, E: 12, F: 2,
